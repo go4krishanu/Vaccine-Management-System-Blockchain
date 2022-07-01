@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Vaccine Verification System</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Vaccine Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#admin">Government</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#citizen">Citizen</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#manufacturer">manufacturer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#hospital">Hospital</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#appointment">Appointment</a>
+            </li>
+          </ul>  
+          <p id="accountAddress" class="d-flex text-center" style="color:white"></p>
+        </div>
+      </div>
+    </nav>
+    <div class="container" >
+      <div id="loader">
+        <p class="text-center">Loading...</p>
+      </div>
+      <br/><br/>
+      <div id="content">
+        <section id="citizen">
+          <h2>Government</h2><br/><br/>
+          <div class="row">
+            <div class="col">
+              <h4>Validate Hospital</h4>
+                <select id="hospitalForValidate" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                </select><br/>
+                <button onclick="validatHospital()" type="text" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col">
+              <h4>Validate Manufacturer</h4>
+                <select id="manufacturerForValidate" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                </select><br/>
+                <button onclick="validateManufacturer()" type="text" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+
+        <hr/><br/><br/>
+        </section>
+        <section id="citizen">
+          <h2>Citizen</h2>
+          <div class="pd-2">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Vaccine Status</th>
+                  <th scope="col">Dose</th>
+                </tr>
+              </thead>
+              <tbody id="candidatesResults">
+              </tbody>
+            </table>
+          </div>
+          <br/><br/>
+          <div class="row">
+            <div class="col">
+              <h4>Register Citizen</h4>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Name</label>
+                  <input type="text" name="citizenName" class="form-control" id="citizenName" aria-describedby="citizenName">
+                </div>
+                <button onclick="registerCitizen()" type="text" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col">
+              <h4>Book Appointment</h4>
+                <select id="hospitalAppointment" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                </select><br/>
+                <button onclick="bookAppointment()" type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+
+        <hr/><br/><br/>
+        </section>
+    
+        <section id="hospital">
+          <h2>Hospital List</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">isValidated</th>
+                <th scope="col">Vaccine</th>
+                <th scope="col">stocks</th>
+                <th scope="col">Dose</th>
+              </tr>
+            </thead>
+            <tbody id="candidatesResults1">
+            </tbody>
+          </table>
+          <br/><br/>
+          <div class="row">
+            <div class="col">
+              <h4>Register Hospital</h4>
+                <div class="mb-3">
+                  <label for="hospitalName" class="form-label">Name</label>
+                  <input type="text" name="hospitalName" class="form-control" id="hospitalName" aria-describedby="hospitalName">
+                </div>
+                <div class="mb-3">
+                  <label for="hospitalVaccine" class="form-label">Vaccine Name</label>
+                  <input type="text" name="hospitalVaccine" class="form-control" id="hospitalVaccine" aria-describedby="hospitalName">
+                </div>
+                <div class="mb-3">
+                  <label for="nabhId" class="form-label">NABH ID</label>
+                  <input type="number" placeholder="National Accreditation Board for Hospitals & Healthcare Providers ID" name="nabhId" class="form-control" id="nabhId" aria-describedby="hospitalName">
+                </div>
+                <div class="mb-3">
+                  <label for="doseCost" class="form-label">Dose Cost</label>
+                  <input type="number" name="doseCost" class="form-control" id="doseCost" aria-describedby="hospitalName">
+                </div>
+                <button onclick="registerHospital()" type="text" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col">
+              <h4>Place Vaccine Order</h4>
+              <select id="manufacturerAppointment" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              </select><br/>
+              <div class="mb-3">
+                <label for="quantityVaccine" class="form-label">Quantity of Vaccine</label>
+                <input type="number" name="quantityVaccine" class="form-control" id="quantityVaccine" aria-describedby="quantityVaccine">
+              </div>
+              <br/>
+              <button onclick="placVaccineOrder()" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col">
+              <h4>Vaccinate Citizen</h4>
+              <select id="appointmentList" class="form-select form-select-sm" aria-label=".form-select-sm example">
+              </select><br/>
+              <button onclick="vaccinateCitizen()" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+
+        <hr/><br/><br/>
+        </section>
+    
+        <section id="manufacturer">
+          <h2>Manufacturer List</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">vaccine</th>
+                <th scope="col">capacity</th>
+                <th scope="col">isValidated</th>
+                <th scope="col">gstNo</th>
+                <th scope="col">doseCost</th>
+              </tr>
+            </thead>
+            <tbody id="candidatesResults2">
+            </tbody>
+          </table>
+          <br/><br/>
+          <div class="row">
+            <div class="col">
+              <h4>Register Manufacturer</h4> 
+              <div class="mb-3">
+                <label for="manufacturerName" class="form-label">Name</label>
+                <input type="text" name="manufacturerName" class="form-control" id="manufacturerName" aria-describedby="manufacturerName">
+              </div>
+              <div class="mb-3">
+                <label for="manufacturerVaccine" class="form-label">Vaccine Name</label>
+                <input type="text" name="manufacturerVaccine" class="form-control" id="manufacturerVaccine" aria-describedby="manufacturerVaccine">
+              </div>
+              <div class="mb-3">
+                <label for="gstNo" class="form-label">Gst NO</label>
+                <input type="number" name="gstNo" class="form-control" id="gstNo" aria-describedby="gstNo">
+              </div>
+              <div class="mb-3">
+                <label for="doseCost1" class="form-label">Vaccine Per Dose Cost</label>
+                <input type="number" name="doseCost1" class="form-control" id="doseCost1" aria-describedby="doseCost1">
+              </div>
+              <button onclick="registerManufacturer()" type="text" class="btn btn-primary">Submit</button>
+          </div>
+            <div class="col">
+              <h4>Add Supply</h4>
+              <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type="number" name="quantity" class="form-control" id="quantity" aria-describedby="quantity">
+              </div>
+              <button onclick="addSupply()" type="text" class="btn btn-primary">Submit</button>
+
+
+            </div>
+          </div>
+
+        <hr/><br/><br/>
+        </section>
+        <section id="appointment">
+          <h2>Appointment List</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">date</th>
+                <th scope="col">citizenId</th>
+                <th scope="col">hospitalId</th>
+                <th scope="col">vaccine</th>
+                <th scope="col">DoseCount</th>
+              </tr>
+            </thead>
+            <tbody id="candidatesResults3">
+            </tbody>
+          </table>
+        </section>
+      </div>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+
+
+
+
